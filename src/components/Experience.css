@@ -1,0 +1,25 @@
+/* src/components/Experience.css */
+.experience-section {
+  background-color: var(--background-color);
+}
+.experience-section .section-title { /* Uses global h2 */ }
+.experience-item {
+  max-width: 800px; margin: 0 auto; background-color: var(--card-background);
+  padding: 30px 40px; border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow); border-left: 5px solid var(--primary-color);
+}
+.experience-role { font-size: 1.6rem; color: var(--primary-color); margin-bottom: 5px; } /* Uses global h3 scaling implicitly or explicitly */
+.experience-company { font-size: var(--font-size-lg); font-weight: 500; color: var(--heading-color); margin-bottom: 5px; }
+.experience-dates { font-size: var(--font-size-sm); color: var(--secondary-color); margin-bottom: 20px; font-style: italic; }
+.experience-responsibilities { list-style: disc; padding-left: 20px; font-size: var(--font-size-md); color: var(--text-color); }
+.experience-responsibilities li { margin-bottom: 12px; line-height: 1.7; }
+
+@media (max-width: 768px) {
+  .experience-item { padding: 25px 20px; }
+  .experience-role { font-size: 1.4rem; } /* Consistent with global h3 at this breakpoint */
+  .experience-company { font-size: var(--font-size-md); }
+  .experience-dates, .experience-responsibilities li { font-size: var(--font-size-sm); }
+}
+@media (max-width: 480px) {
+    .experience-role { font-size: 1.2rem; } /* Consistent with global h3 */
+}

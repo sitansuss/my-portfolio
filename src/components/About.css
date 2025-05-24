@@ -1,0 +1,27 @@
+/* src/components/About.css */
+.about-section {
+  background-color: var(--card-background); 
+}
+.section-title { 
+  /* Uses global h2 styling, which is now responsive */
+  margin-bottom: 40px; 
+  position: relative; display: inline-block;
+}
+.section-title::after {
+  content: ''; display: block; width: 60px; height: 4px;
+  background-color: var(--primary-color); margin: 10px auto 0; border-radius: 2px;
+}
+.about-content {
+  max-width: 800px; margin: 0 auto; font-size: var(--font-size-lg); line-height: 1.8;
+  color: var(--text-color);
+}
+.about-content p { margin-bottom: 20px; }
+.about-photo {
+  float: left; width: 200px; height: 200px; border-radius: var(--border-radius);
+  margin-right: 30px; margin-bottom: 15px; object-fit: cover;
+  box-shadow: var(--card-shadow); border: 3px solid var(--secondary-color);
+}
+@media (max-width: 768px) {
+  .about-photo { float: none; display: block; margin: 0 auto 30px; width: 150px; height: 150px; }
+  .about-content { font-size: var(--font-size-md); }
+}
