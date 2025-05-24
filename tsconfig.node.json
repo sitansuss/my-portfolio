@@ -1,25 +1,36 @@
 {
+  // "extends": "./tsconfig.json", // Optional: if you have truly universal compilerOptions in the root tsconfig.json
+                                 // that you want to apply here as well. Often not strictly needed for tsconfig.node.json.
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
-    "target": "ES2022",
-    "lib": ["ES2023"],
-    "module": "ESNext",
-    "skipLibCheck": true,
+    "composite": true, // Enables building this project as part of a larger project with references.
+                       // Vite templates often set this.
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo", // Output file for incremental compilation.
 
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
-    "noEmit": true,
+    "module": "ESNext",            // Use modern ES modules for Vite config.
+    "moduleResolution": "bundler", // Modern module resolution, aligns with Vite.
+                                   // Or "node" if 'bundler' causes issues, but 'bundler' is preferred.
+    
+    "allowSyntheticDefaultImports": true, // Allows default imports from modules with no default export.
+    "esModuleInterop": true,              // Enables better compatibility between ES modules and CommonJS modules.
+    "strict": true,                       // Enable all strict type-checking options.
+    "noEmit": true,                       // This config is for type-checking Vite config, not for emitting JS.
+                                          // Vite handles the execution of its config file.
+    "skipLibCheck": true,                 // Skip type checking of all declaration files (*.d.ts).
+    "forceConsistentCasingInFileNames": true, // Good practice.
 
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    // Specify Node.js types if your Vite config uses Node.js specific APIs (e.g., 'path', 'fs')
+    // If you don't use Node.js specific APIs in vite.config.ts, this might not be strictly necessary,
+    // but it's good practice if there's any chance you might.
+    "types": ["node"], // This adds Node.js global type definitions.
+
+    // Target for Node.js environment. A recent LTS version of Node is usually fine.
+    // Vite itself requires a certain Node version.
+    "target": "ES2022", // Or a target compatible with the Node.js version Vercel uses or you use locally.
+    "lib": ["ES2022"]    // Basic ES library for Node environment code. No DOM needed.
   },
-  "include": ["vite.config.ts"]
+  "include": [
+    "vite.config.ts", // The primary file this configuration applies to.
+    // You can add other Node.js script files here if you have them, e.g., "scripts/**/*.ts"
+  ]
+  // "exclude": ["node_modules", "dist", "src"] // Explicitly exclude app source if necessary, though "include" is usually enough.
 }
