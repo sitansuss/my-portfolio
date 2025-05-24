@@ -1,7 +1,28 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    "target": "ES2022", // MODIFIED: Updated target to ES2022 or higher (ESNext also works)
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"], // MODIFIED: Ensured ES2022 (or later) is in the lib array
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true, // Usually false by default in modern TS, but Vite might set it. Keep if it was there.
+                                      // If 'false', you'd import './App' instead of './App.tsx' (TS resolves it)
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true, // Vite handles the emit, TypeScript only does type checking
+    "jsx": "react-jsx",
+
+    /* Linting / Strictness - these are good defaults */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true, // Enables compatibility with modules that use commonJS default exports
+    "forceConsistentCasingInFileNames": true // Good practice
+  },
+  "include": ["src", "vite.config.ts"], // Files TypeScript should check
+  "references": [{ "path": "./tsconfig.node.json" }] // For node-specific parts like vite.config.ts
 }
