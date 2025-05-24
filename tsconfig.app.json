@@ -1,42 +1,36 @@
 {
-  // "extends": "./tsconfig.json", // This line might be present if it inherits from the root tsconfig.json
-                                  // If it is, ensure the root one doesn't have conflicting lib/target settings,
-                                  // or that this file's settings correctly override.
+  // "extends": "./tsconfig.json", // Can extend root if it has useful shared options
   "compilerOptions": {
-    // --- CORE CHANGES ---
-    "target": "ES2022",                     // Specify the ECMAScript target version
-    "lib": ["ES2022", "DOM", "DOM.Iterable"], // Include type definitions for ES2022 and browser DOM APIs
+    "composite": true, // Required for project references
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 
-    // --- COMMON VITE + REACT-TS SETTINGS (Ensure these are present or appropriate) ---
-    "jsx": "react-jsx",                     // How JSX is processed
-    "module": "ESNext",                     // Module system for modern JavaScript
-    "moduleResolution": "bundler",          // Or "node", how modules are resolved
-    
-    "composite": true,                      // Often used in project references setup by Vite
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo", // Vite's build info file
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
 
-    "strict": true,                         // Enable all strict type-checking options
-    "esModuleInterop": true,                // Enables compatibility with CommonJS modules
-    "allowSyntheticDefaultImports": true,   // Allow default imports from modules with no default export
-    "forceConsistentCasingInFileNames": true,// Enforce consistent casing in file names
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
     
-    "skipLibCheck": true,                   // Skip type checking of all declaration files (*.d.ts)
-    "noEmit": true,                         // Do not emit output (Vite handles bundling/transpilation)
-    "isolatedModules": true,                // Ensure each file can be safely transpiled without relying on other imports (good for bundlers)
-    
-    // Optional but good linting-related options
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "resolveJsonModule": true               // Allows importing .json files
-    
-    // If your root tsconfig.json has "baseUrl" and "paths" for aliases,
-    // they might be inherited or you might need to define them here if App.json is standalone.
+    "isolatedModules": true, // Good for bundlers like Vite
+    "resolveJsonModule": true,
+
+    // For `tsc -b` to work with references without erroring on `noEmit`:
+    // We need to allow declaration emits, but Vite will do the actual JS bundling.
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true, // Crucial: TSC will only output .d.ts files, not .js
+    "noEmit": false,             // Must be false if emitDeclarationOnly is true
+
+    // Path aliases if you use them
     // "baseUrl": ".",
     // "paths": {
     //   "@/*": ["./src/*"]
     // }
   },
-  "include": ["src"] // Specifies that this tsconfig applies to files in the 'src' directory
-  // "exclude": ["node_modules", "dist"] // Usually handled by root or not needed if include is specific
+  "include": ["src"] // This config is for your application source code
 }
