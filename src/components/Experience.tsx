@@ -13,7 +13,8 @@ const experienceData: ExperienceItem = {
     "Facilitated seamless migration of data from client servers to Oracle data server, employing automation techniques.",
     "Expertly filtered and extracted pertinent information using Python, enhancing efficiency and accuracy in data processing.",
     "Proficiently developed robust business logic using Java's Groovy rule, improving overall system functionality."
-  ]
+  ],
+  dates: ''
 };
 
 const Experience: React.FC = () => {
