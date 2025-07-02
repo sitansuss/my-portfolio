@@ -2,13 +2,13 @@
 import React from 'react';
 import './Experience.css';
 import type { ExperienceItem } from '../types';
-import { useInView } from 'react-intersection-observer'; // Import
+import { useInView } from 'react-intersection-observer';
 
+// Now this object is valid because the 'dates' property in ExperienceItem is optional
 const experienceData: ExperienceItem = {
-  // ... same data as before
   role: "Associate Technical Consultant",
   company: "Mastek",
-  dates: "[Your Start Date] – [Your End Date]",
+  // 'dates' property is completely removed, not just commented out
   responsibilities: [
     "Facilitated seamless migration of data from client servers to Oracle data server, employing automation techniques.",
     "Expertly filtered and extracted pertinent information using Python, enhancing efficiency and accuracy in data processing.",
@@ -43,7 +43,11 @@ const Experience: React.FC = () => {
         >
           <h3 className="experience-role">{experienceData.role}</h3>
           <p className="experience-company">{experienceData.company}</p>
-          <p className="experience-dates">{experienceData.dates}</p>
+          
+          {/* --- CHANGE IS HERE --- */}
+          {/* This line will now only render if the dates property exists */}
+          {experienceData.dates && <p className="experience-dates">{experienceData.dates}</p>}
+          
           <ul className="experience-responsibilities">
             {experienceData.responsibilities.map((resp, index) => (
               <li key={index}>{resp}</li>
@@ -54,4 +58,5 @@ const Experience: React.FC = () => {
     </section>
   );
 };
+
 export default Experience;
